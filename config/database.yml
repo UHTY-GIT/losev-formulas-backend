@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: losev_formulas
-  username: root
-  password: <%= ENV["BAYO_API_DATABASE_PASSWORD"] %>
+  username: postgres
+  password: 123456
