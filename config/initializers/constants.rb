@@ -1,0 +1,1 @@
+IMAGE_CONTENT_TYPE = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'].freeze

@@ -10,6 +10,9 @@ gem 'pg', '~> 1.5', '>= 1.5.3'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 
+# For env file
+gem 'dotenv', '~> 2.8', '>= 2.8.1'
+
 # Code documentation
 gem 'swagger-docs'
 gem 'swagger_ui_engine', github: 'azelenets/swagger_ui_engine'
@@ -17,6 +20,7 @@ gem 'swagger_ui_engine', github: 'azelenets/swagger_ui_engine'
 # For auth
 gem 'jwt', '~> 2.6'
 gem 'bcrypt', '~> 3.1', '>= 3.1.19'
+gem 'passgen', '~> 1.2'
 
 # Admin panel
 gem 'activeadmin'
@@ -81,3 +85,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'shoulda-matchers', '~> 5.3'

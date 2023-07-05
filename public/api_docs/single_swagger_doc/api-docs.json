@@ -1,9 +1,12 @@
 {
   "apiVersion": "1",
   "swaggerVersion": "1.2",
-  "basePath": "127.0.0.1",
+  "basePath": "http://127.0.0.1:3000",
   "apis": [
-
+    {
+      "path": "/api_docs/single_swagger_doc/api/v1/users.{format}",
+      "description": "Users Auth"
+    }
   ],
   "authorizations": null
 }

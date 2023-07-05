@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  errors:
+    validation: Validation error has occurred
+
