@@ -33,4 +33,6 @@ en:
   hello: "Hello world"
   errors:
     validation: Validation error has occurred
+    password_or_email: Password or eamil is invalid
+    user_must_be: You need to login before continue
 

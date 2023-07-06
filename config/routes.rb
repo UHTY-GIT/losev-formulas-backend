@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      resources :users, only: [] do
+      resources :users, only: [:show] do
         post :sign_up, on: :collection
         post :sign_in, on: :collection
+        put :profile_update, on: :collection
       end
 
     end

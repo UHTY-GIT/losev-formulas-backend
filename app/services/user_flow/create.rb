@@ -18,11 +18,11 @@ module UserFlow
     attr_reader :params
 
     def create_user!
-      @user ||= User.create!(user_params)
+      @user = User.create!(user_params)
     end
 
     def create_user_token!
-      @token ||= JwtService.new(@user).generate_token
+      @token = JwtService.new({user: @user}).generate_token
     end
 
     def user_params
