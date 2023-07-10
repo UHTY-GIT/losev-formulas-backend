@@ -1538,6 +1538,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     devise (4.9.2)
@@ -1546,6 +1547,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.8.1)
     erubi (1.12.0)
     execjs (2.8.1)
     ffi (1.15.5)
@@ -1630,6 +1632,7 @@ GEM
       terrapin (~> 0.6.0)
     paperclip-meta (3.1.0)
       paperclip (>= 5.0)
+    passgen (1.2.0)
     pg (1.5.3)
     pkg-config (1.5.2)
     pry (0.14.2)
@@ -1683,6 +1686,12 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.6.0)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.14.1)
+      connection_pool
+    redis-namespace (1.11.0)
+      redis (>= 4)
     require_all (3.0.0)
     responders (3.1.0)
       actionpack (>= 5.2)
@@ -1706,6 +1715,8 @@ GEM
       sprockets-rails
       tilt
     select2-rails (4.0.13)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     spring (4.1.1)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
@@ -1754,6 +1765,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   devise
+  dotenv (~> 2.8, >= 2.8.1)
   hashie
   httpi
   jwt (~> 2.6)
@@ -1761,15 +1773,19 @@ DEPENDENCIES
   listen (~> 3.3)
   paperclip (~> 6.1)
   paperclip-meta
+  passgen (~> 1.2)
   pg (~> 1.5, >= 1.5.3)
   pry-rails (~> 0.3.9)
   puma (~> 5.0)
   rack-attack
   rack-cors
   rails (~> 6.1.7, >= 6.1.7.2)
+  redis (~> 5.0, >= 5.0.6)
+  redis-namespace (~> 1.11)
   rmagick
   sass-rails
   select2-rails
+  shoulda-matchers (~> 5.3)
   spring
   stripe (~> 8.5)
   swagger-docs
@@ -1780,4 +1796,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.4.14
+   2.4.8

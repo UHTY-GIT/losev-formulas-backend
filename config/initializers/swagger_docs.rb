@@ -23,7 +23,7 @@ module Swagger
         api_path.gsub!(controller_base_path, '')
 
         # Substitute api version params in path to current API version
-        api_path.gsub!('{api_v}', "v#{Rails.application.config.latest_api_version}")
+        api_path.gsub!('{api_v}', "v1")
 
         "/" + trim_slashes(api_path)
       end
@@ -35,6 +35,6 @@ end
 Swagger::Docs::Config.register_apis('1' => {
   controller_base_path: '',
   api_file_path: 'public/api_docs/single_swagger_doc/',
-  base_path: '127.0.0.1',
+  base_path: 'http://127.0.0.1:3000/',
   clean_directory: true
 })
