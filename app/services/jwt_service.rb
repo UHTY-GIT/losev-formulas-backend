@@ -7,8 +7,7 @@ class JwtService
   end
 
   def generate_token
-    #key = "user_#{user.id}_token"
-    return if user.nil? #|| $redis.get(key)
+    return if user.nil?
 
     create_user_token
     add_token_to_redis
@@ -30,11 +29,10 @@ class JwtService
   attr_reader :data, :user, :token, :payload, :destroy
 
   def add_token_to_redis
-    create_user_token_key!
-    token_key = $redis.get("user_#{user.id}_token")
+    user.update!(redis_key: Passgen.generate(length: 20))
 
-    $redis.set(token_key, @token)
-    $redis.expire(token_key, ENV['EXPIRE_TOKEN'].to_i)
+    $redis.set(user.redis_key, @token)
+    $redis.expire(user.redis_key, ENV['EXPIRE_TOKEN'].to_i)
 
     @token
   end
@@ -44,21 +42,19 @@ class JwtService
   end
 
   def destroy_user_token!
-    token_redis_key = $redis.get("user_#{user.id}_token")
-
-    $redis.del(token_redis_key)
-    $redis.del("user_#{user.id}_token")
+    $redis.del(user.redis_key)
   end
 
   def current_user
     return unless decode_user_token
 
     user_data = decode_user_token.first
-    token_redis_key = $redis.get("user_#{user_data['user_id']}_token")
+    user = User.find_by(id: user_data['user_id'])
+    token = $redis.get(user.redis_key)
 
-    return unless $redis.get(token_redis_key)
+    return unless token
 
-    User.find_by(id: user_data['user_id'])
+    user
   end
 
   def decode_user_token
@@ -79,10 +75,4 @@ class JwtService
       exp: Time.now.to_i + ENV['EXPIRE_TOKEN'].to_i
     }
   end
-
-  def create_user_token_key!
-    key = "user_#{user.id}_token"
-    $redis.set(key, Passgen::generate(:length => 20))
-  end
-
 end

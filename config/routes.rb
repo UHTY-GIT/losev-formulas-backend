@@ -13,6 +13,8 @@ Rails.application.routes.draw do
         post :sign_in, on: :collection
         put :profile_update, on: :collection
         post :logout, on: :collection
+        get :profile, on: :collection
+        post :change_password, on: :collection
       end
 
     end

@@ -20,7 +20,11 @@ class User < ApplicationRecord
     t.add :email
     t.add :name
     t.add :avatar_url, as: :avatar
+  end
 
+  api_accessible :index, extend: :simple do |t|
+    t.add :created_at
+    t.add :updated_at
   end
 
   def avatar_url

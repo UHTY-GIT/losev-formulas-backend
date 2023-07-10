@@ -35,4 +35,5 @@ en:
     validation: Validation error has occurred
     password_or_email: Password or eamil is invalid
     user_must_be: You need to login before continue
+    current_password_is_incorect: current password is incorect
 

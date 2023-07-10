@@ -50,7 +50,11 @@ module Api
 
       def profile_update
         current_user_must_be && return
-        render_success current_user
+
+        service = UserFlow::Update.new(params, current_user)
+        service.call
+
+        render_success current_user.as_api_response(:simple)
       end
 
       swagger_api :logout do
@@ -67,6 +71,36 @@ module Api
                                    destroy: true
                                  })
         service.logout_current_user
+
+        render_success true
+      end
+
+      swagger_api :profile do
+        summary 'User profile'
+        param :header, :authtoken, :string, :required, 'User authtoken'
+        response :ok, 'Success'
+      end
+
+      def profile
+        current_user_must_be && return
+
+        render_success current_user.as_api_response(:index)
+      end
+
+      swagger_api :change_password do
+        summary 'Change customer password'
+        param :header, :authtoken, :string, :required, 'User authtoken'
+        param :form, :old_password, :string, :required, 'User old password'
+        param :form, :new_password, :string, :required, 'User new password'
+        response :ok, 'Success'
+      end
+
+      def change_password
+        current_user_must_be && return
+
+        service = UserFlow::ChangePassword.new(current_user, params)
+        service.call
+        return validation_error(service.error_message) if service.error_message
 
         render_success true
       end
