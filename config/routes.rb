@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         post :sign_up, on: :collection
         post :sign_in, on: :collection
         put :profile_update, on: :collection
+        post :logout, on: :collection
       end
 
     end

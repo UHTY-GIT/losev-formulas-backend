@@ -28,14 +28,15 @@ module ResponseHelper
   def current_user_must_be
     if current_user.nil?
       render_auth_error
-    else
       true
+    else
+      false
     end
 
   end
 
   def current_user
-    @current_user = JwtService.new({token: get_auth_token}).get_current_user
+    @current_user ||= JwtService.new({ token: get_auth_token }).get_current_user
   end
 
   def get_auth_token

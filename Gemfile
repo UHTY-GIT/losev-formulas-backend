@@ -17,6 +17,10 @@ gem 'dotenv', '~> 2.8', '>= 2.8.1'
 gem 'swagger-docs'
 gem 'swagger_ui_engine', github: 'azelenets/swagger_ui_engine'
 
+# redis-server
+gem 'redis', '~> 5.0', '>= 5.0.6'
+gem 'redis-namespace', '~> 1.11'
+
 # For auth
 gem 'jwt', '~> 2.6'
 gem 'bcrypt', '~> 3.1', '>= 3.1.19'

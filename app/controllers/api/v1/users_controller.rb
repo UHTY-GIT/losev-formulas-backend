@@ -18,7 +18,7 @@ module Api
         service.call
         @user = service.user
 
-        return render_success @user.as_api_response(:simple).merge!(token: service.token) if @user
+        return render_success @user.as_api_response(:simple).merge!(token: $redis.get("user_#{@user.id}")) if @user
 
         render_errors(@user)
       end
@@ -50,6 +50,25 @@ module Api
 
       def profile_update
         current_user_must_be && return
+        render_success current_user
+      end
+
+      swagger_api :logout do
+        summary 'Destroy user session'
+        param :header, :authtoken, :string, :required, 'User auth token'
+        response :ok, 'Success'
+      end
+
+      def logout
+        current_user_must_be && return
+
+        service = JwtService.new({
+                                   user: current_user,
+                                   destroy: true
+                                 })
+        service.logout_current_user
+
+        render_success true
       end
 
     end

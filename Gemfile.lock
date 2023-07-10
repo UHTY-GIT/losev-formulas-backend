@@ -1538,6 +1538,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     devise (4.9.2)
@@ -1685,6 +1686,12 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.6.0)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.14.1)
+      connection_pool
+    redis-namespace (1.11.0)
+      redis (>= 4)
     require_all (3.0.0)
     responders (3.1.0)
       actionpack (>= 5.2)
@@ -1773,6 +1780,8 @@ DEPENDENCIES
   rack-attack
   rack-cors
   rails (~> 6.1.7, >= 6.1.7.2)
+  redis (~> 5.0, >= 5.0.6)
+  redis-namespace (~> 1.11)
   rmagick
   sass-rails
   select2-rails
@@ -1787,4 +1796,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.4.14
+   2.4.8

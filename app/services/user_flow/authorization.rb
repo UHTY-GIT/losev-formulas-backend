@@ -22,7 +22,9 @@ module UserFlow
 
     def create_user_token!
       return @error_message = I18n.t('errors.password_or_email') unless user_can_be_auth?
-      @token = JwtService.new({user: @user}).generate_token
+      @token = JwtService.new({
+                                user: @user
+                              }).generate_token
     end
 
     def user_can_be_auth?
