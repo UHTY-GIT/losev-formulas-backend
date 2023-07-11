@@ -15,10 +15,13 @@ WORKDIR /rails
 ENV RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true" \
     RAILS_ENV="production" \
-    BUNDLE_WITHOUT="development"
-
+    BUNDLE_WITHOUT="development" \
+    BUNDLER_VERSION=2.1.4
 # Install application gems
 COPY Gemfile Gemfile.lock ./
+
+RUN gem install bundler:2.1.4
+
 RUN bundle install
 
 # Copy application code
