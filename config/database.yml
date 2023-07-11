@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: losev_formulas
+  database: losev_formulas_production
   username: postgres
   password: 123456
