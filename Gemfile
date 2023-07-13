@@ -38,7 +38,7 @@ gem 'acts_as_list'
 gem 'select2-rails'
 gem 'devise'
 gem 'sass-rails'
-
+gem 'execjs', '~> 2.8', '>= 2.8.1'
 # Pagination
 gem 'kaminari'
 
