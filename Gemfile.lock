@@ -1766,7 +1766,7 @@ DEPENDENCIES
   byebug
   devise
   dotenv (~> 2.8, >= 2.8.1)
-  execjs (~> 2.8, >= 2.8.1)
+  execjs
   hashie
   httpi
   jwt (~> 2.6)
