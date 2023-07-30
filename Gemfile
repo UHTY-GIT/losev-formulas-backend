@@ -39,7 +39,7 @@ gem 'select2-rails'
 gem 'devise'
 gem 'sass-rails'
 gem 'execjs'
-gem 'therubyracer'
+
 # Pagination
 gem 'kaminari'
 

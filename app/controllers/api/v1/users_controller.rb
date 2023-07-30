@@ -18,7 +18,7 @@ module Api
         service.call
         @user = service.user
 
-        return render_success @user.as_api_response(:simple).merge!(token: $redis.get("user_#{@user.id}")) if @user
+        return render_success @user.as_api_response(:simple).merge!(token: $redis.get(@user.redis_key)) if @user
 
         render_errors(@user)
       end
