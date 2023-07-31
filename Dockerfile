@@ -33,7 +33,7 @@ RUN bundle exec bootsnap precompile --gemfile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN bundle exec rails assets:precompile
-RUN bundle exec rails db:create db:migrate
+RUN bundle exec rails db:migrate
 RUN bundle exec rails swagger:docs
 
 # Entrypoint prepares the database.
