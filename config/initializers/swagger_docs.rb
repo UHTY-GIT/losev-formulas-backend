@@ -35,6 +35,6 @@ end
 Swagger::Docs::Config.register_apis('1' => {
   controller_base_path: '',
   api_file_path: 'public/api_docs/single_swagger_doc/',
-  base_path: 'http://127.0.0.1:3000/',
+  base_path: Rails.env.development? ? 'http://127.0.0.1:3000/' : ENV['PRODUCTION_SERVER_NAME'],
   clean_directory: true
 })
