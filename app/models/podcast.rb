@@ -2,6 +2,8 @@ class Podcast < ApplicationRecord
 
   acts_as_api
 
+  has_and_belongs_to_many :categories, -> { distinct }
+
   validates :title, :description, presence: true
 
   has_attached_file :image,
