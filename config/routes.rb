@@ -17,6 +17,11 @@ Rails.application.routes.draw do
         post :change_password, on: :collection
       end
 
+      resources :categories, only: [:index]
+
+      resources :podcasts, only: [:index] do
+
+      end
     end
   end
 

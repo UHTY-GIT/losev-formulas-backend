@@ -6,4 +6,9 @@ class Category < ApplicationRecord
 
   enum category_type: %i[free paid]
 
+  api_accessible :list do |t|
+    t.add :name
+    t.add :category_type
+  end
+
 end

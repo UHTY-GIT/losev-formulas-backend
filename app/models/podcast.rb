@@ -22,7 +22,22 @@ class Podcast < ApplicationRecord
 
 
 
+  api_accessible :list do |t|
+    t.add :id
+    t.add :title
+    t.add :description
+    t.add :price
+    t.add :position
+    t.add :categories
+    t.add :image_url
+    t.add :audio_url
+  end
+
   def image_url
     image.file? ? image.url : nil
+  end
+
+  def audio_url
+    audio.file? ? audio.url : nil
   end
 end
