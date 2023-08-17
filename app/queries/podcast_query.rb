@@ -18,8 +18,7 @@ class PodcastQuery
   end
 
   def call
-    scope = make_search
-    SORTING[sort_by].call(filtered_by_category(scope))
+    SORTING[sort_by].call(filtered_by_category(make_search))
   end
 
   private
@@ -30,8 +29,7 @@ class PodcastQuery
     search.nil? ? relation : relation.where("title ILIKE ? OR description ILIKE ?", "%#{search}%", "%#{search}%")
   end
   def filtered_by_category(relation)
-    return relation unless category_params
-    p category_params
+    return relation if category_params.blank?
     relation.joins(:categories).where(categories: category_params).distinct
   end
 
