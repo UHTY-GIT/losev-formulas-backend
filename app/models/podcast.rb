@@ -25,7 +25,7 @@ class Podcast < ApplicationRecord
   api_accessible :list do |t|
     t.add :id
     t.add :title
-    t.add :description
+    t.add :description, as: :author
     t.add :price
     t.add :position
     t.add :categories
