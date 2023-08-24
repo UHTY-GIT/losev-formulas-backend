@@ -2,6 +2,7 @@ class Podcast < ApplicationRecord
 
   acts_as_api
 
+  has_many :ratings
   has_and_belongs_to_many :categories, -> { distinct }
 
   validates :title, :description, presence: true
@@ -27,7 +28,7 @@ class Podcast < ApplicationRecord
     t.add :title
     t.add :description, as: :author
     t.add :price
-    t.add :position
+    t.add :rating
     t.add :categories
     t.add :image_url
     t.add :audio_url

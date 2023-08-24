@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       resources :podcasts, only: [:index] do
 
       end
+
+      resource :ratings, only: [] do
+        post :set_rating, :collection
+      end
     end
   end
 
