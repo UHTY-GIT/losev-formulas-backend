@@ -8,7 +8,7 @@ module RatingFlow
       return unless user_can_set_rate_for_podcast?
 
       create_rating
-      UpdateRatingForPodcast.new(params[:podcast_id]).call
+      UpdateRatingForPodcast.new(params[:podcast_id], params[:rating_value]).call
     end
 
     private

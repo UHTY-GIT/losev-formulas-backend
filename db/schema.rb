@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_22_065519) do
+ActiveRecord::Schema.define(version: 2023_08_25_135323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2023_08_22_065519) do
     t.index ["category_id", "podcast_id"], name: "index_categories_podcasts_on_category_id_and_podcast_id", unique: true
     t.index ["category_id"], name: "index_categories_podcasts_on_category_id"
     t.index ["podcast_id"], name: "index_categories_podcasts_on_podcast_id"
+  end
+
+  create_table "favorite_podcasts", force: :cascade do |t|
+    t.bigint "podcast_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["podcast_id"], name: "index_favorite_podcasts_on_podcast_id"
+    t.index ["user_id"], name: "index_favorite_podcasts_on_user_id"
   end
 
   create_table "podcasts", force: :cascade do |t|

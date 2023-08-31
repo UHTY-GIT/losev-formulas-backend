@@ -19,6 +19,36 @@ module Api
         render_success podcasts.as_api_response(:list)
       end
 
+      swagger_api :add_to_favorite do
+        summary 'Add podcast to favorite list'
+        param :header, :authtoken, :string, :required, 'User authtoken'
+        param :form, :podcast_id, :integer, :required, 'Podcast identifier'
+        response :ok, 'Success'
+      end
+
+      def add_to_favorite
+        current_user_must_be && return
+
+        service = PodcastFlow::AddToFavorite.new(current_user, params[:podcast_id]).call
+        render_success service
+      end
+
+      swagger_api :favorite do
+        summary 'Favorite podcast list'
+        param :header, :authtoken, :string, :required, 'User authtoken'
+        response :ok, 'Success'
+      end
+
+      def favorite
+        current_user_must_be && return
+        podcasts = Podcast
+                     .joins(:favorite_podcasts)
+                     .where(favorite_podcasts: { user_id: current_user.id })
+                     .distinct
+
+        render_success podcasts.as_api_response(:list)
+      end
+
     end
   end
 end
