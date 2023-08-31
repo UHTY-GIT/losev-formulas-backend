@@ -6,9 +6,15 @@ ActiveAdmin.register Podcast do
 
   sortable tree: false
 
+  scope :all, default: true
+  scope :favorite_podcasts
+
   index as: :sortable do
     label 'Podcast' do |podcast|
-      "id: #{podcast.id}<br>title: #{podcast.title}<br>description: #{podcast.description}<br>#{image_tag podcast.image.url, height: 100}".html_safe
+      "id: #{podcast.id}<br>title: #{podcast.title}<br>
+       description: #{podcast.description}<br>
+       rating: #{podcast.rating}<br>
+       #{image_tag podcast.image.url, height: 100}".html_safe
     end
     actions
   end
@@ -30,6 +36,7 @@ ActiveAdmin.register Podcast do
         item.categories.map{ |c| link_to c.name, admin_category_path(c.id) }.join(', ').html_safe
       end
       row :position
+      row :rating
       row :created_at
       row :updated_at
     end

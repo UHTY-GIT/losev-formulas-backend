@@ -20,7 +20,12 @@ Rails.application.routes.draw do
       resources :categories, only: [:index]
 
       resources :podcasts, only: [:index] do
+        post :add_to_favorite, on: :collection
+        get :favorite, on: :collection
+      end
 
+      resource :ratings, only: [] do
+        post :set_rating, on: :collection
       end
     end
   end
