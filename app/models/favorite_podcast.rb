@@ -5,4 +5,10 @@ class FavoritePodcast < ApplicationRecord
   belongs_to :user
   belongs_to :podcast
 
+  delegate :is_active?, to: :podcast
+
+  def is_active?
+    active
+  end
+
 end

@@ -2,12 +2,14 @@ ActiveAdmin.register Podcast do
 
   config.filters = false
 
-  permit_params :title, :description, :position, :image, :audio, :price, :currency, :category_ids
+  permit_params :title, :description, :position, :image, :audio, :price, :currency, :top, :recommended, :category_ids
 
   sortable tree: false
 
   scope :all, default: true
   scope :favorite_podcasts
+  scope :in_top
+  scope :recommended
 
   index as: :sortable do
     label 'Podcast' do |podcast|
@@ -25,6 +27,8 @@ ActiveAdmin.register Podcast do
       row :title
       row :description
       row :price
+      row :recommended
+      row :top
       row :currency
       row 'Image' do |item|
         image_tag item.image_url, height: 300 if item.image_url
@@ -46,6 +50,8 @@ ActiveAdmin.register Podcast do
     f.inputs do
       f.input :title
       f.input :description
+      f.input :recommended
+      f.input :top
       f.input :image, as: :image_with_preview
       f.input :audio, as: :file
       f.input :price

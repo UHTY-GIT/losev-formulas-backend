@@ -13,6 +13,13 @@ class Podcast < ApplicationRecord
     joins(:favorite_podcasts).distinct
   }
 
+  scope :recommended, -> {
+    where(recommended: true)
+  }
+  scope :in_top, -> {
+    where(top: true)
+  }
+
   has_attached_file :image,
                     url: '/uploads/podcasts/images/:hash.:extension',
                     path: 'public/uploads/podcasts/images/:hash.:extension',
@@ -29,15 +36,18 @@ class Podcast < ApplicationRecord
 
 
 
-  api_accessible :list do |t|
+  api_accessible :simple do |t|
     t.add :id
     t.add :title
     t.add :description, as: :author
     t.add :price
     t.add :rating
-    t.add :categories
     t.add :image_url
     t.add :audio_url
+  end
+
+  api_accessible :list, extend: :simple do |t|
+    t.add :categories
   end
 
   def image_url

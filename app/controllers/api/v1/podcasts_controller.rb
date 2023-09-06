@@ -23,13 +23,14 @@ module Api
         summary 'Add podcast to favorite list'
         param :header, :authtoken, :string, :required, 'User authtoken'
         param :form, :podcast_id, :integer, :required, 'Podcast identifier'
+        param :form, :add_podcast, :boolean, :required, 'True if add, False if remove'
         response :ok, 'Success'
       end
 
       def add_to_favorite
         current_user_must_be && return
 
-        service = PodcastFlow::AddToFavorite.new(current_user, params[:podcast_id]).call
+        service = PodcastFlow::AddToFavorite.new(current_user, params[:podcast_id], params[:add_podcast]).call
         render_success service
       end
 
@@ -43,12 +44,31 @@ module Api
         current_user_must_be && return
         podcasts = Podcast
                      .joins(:favorite_podcasts)
-                     .where(favorite_podcasts: { user_id: current_user.id })
+                     .where(favorite_podcasts: { user_id: current_user.id, active: true})
                      .distinct
 
         render_success podcasts.as_api_response(:list)
       end
 
+      swagger_api :top do
+        summary "Top podcasts"
+        response :ok, 'Success'
+      end
+
+      def top
+        podcasts = Podcast.in_top
+        render_success podcasts.as_api_response(:simple)
+      end
+
+      swagger_api :recommendation do
+        summary "Recommend podcasts"
+        response :ok, 'Success'
+      end
+
+      def recommendation
+        podcasts = Podcast.recommended
+        render_success podcasts.as_api_response(:simple)
+      end
     end
   end
 end

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       resources :podcasts, only: [:index] do
         post :add_to_favorite, on: :collection
         get :favorite, on: :collection
+        get :top, on: :collection
+        get :recommendation, on: :collection
       end
 
       resource :ratings, only: [] do

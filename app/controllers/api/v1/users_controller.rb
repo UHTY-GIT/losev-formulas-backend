@@ -43,7 +43,7 @@ module Api
         summary 'Update user profile'
         param :header, :authtoken, :string, :required, 'User auth token'
         param :form, :name, :string, :required, 'User name'
-        param :form, :email, :string, :required, 'User email'
+        param :form, :email, :string, :optional, 'User email'
         param :form, :avatar, :file, :optional, 'User avatar'
         response :ok, 'Success'
       end
