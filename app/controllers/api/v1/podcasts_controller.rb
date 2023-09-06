@@ -49,6 +49,25 @@ module Api
         render_success podcasts.as_api_response(:list)
       end
 
+      swagger_api :top do
+        summary "Top podcasts"
+        response :ok, 'Success'
+      end
+
+      def top
+        podcasts = Podcast.in_top
+        render_success podcasts.as_api_response(:simple)
+      end
+
+      swagger_api :recommendation do
+        summary "Recommend podcasts"
+        response :ok, 'Success'
+      end
+
+      def recommendation
+        podcasts = Podcast.recommended
+        render_success podcasts.as_api_response(:simple)
+      end
     end
   end
 end
