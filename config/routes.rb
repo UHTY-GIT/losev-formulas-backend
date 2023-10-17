@@ -22,15 +22,22 @@ Rails.application.routes.draw do
       resources :podcasts, only: [:index] do
         post :add_to_favorite, on: :collection
         get :favorite, on: :collection
+        get :user_podcasts, on: :collection
         get :top, on: :collection
         get :recommendation, on: :collection
       end
 
-      resource :ratings, only: [] do
+      resources :ratings, only: [] do
         post :set_rating, on: :collection
+      end
+
+      resources :orders, only: [:create] do
+
       end
     end
   end
+
+  post '/portmone_webhooks/payment_success' => 'portmone_webhooks#payment_success'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

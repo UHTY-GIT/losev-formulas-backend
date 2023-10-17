@@ -35,3 +35,4 @@
 /public/api_docs
 /public/assets
 /public/uploads
+config/.env

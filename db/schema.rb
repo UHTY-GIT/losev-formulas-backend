@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_06_125528) do
+ActiveRecord::Schema.define(version: 2023_10_13_103130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,19 @@ ActiveRecord::Schema.define(version: 2023_09_06_125528) do
     t.index ["user_id"], name: "index_favorite_podcasts_on_user_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "podcast_id"
+    t.string "uuid"
+    t.integer "status", default: 0
+    t.integer "payment_method"
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["podcast_id"], name: "index_orders_on_podcast_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "podcasts", force: :cascade do |t|
     t.integer "position", default: 0
     t.decimal "price", default: "1.0"
@@ -83,6 +96,15 @@ ActiveRecord::Schema.define(version: 2023_09_06_125528) do
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
+  create_table "user_podcasts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "podcast_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["podcast_id"], name: "index_user_podcasts_on_podcast_id"
+    t.index ["user_id"], name: "index_user_podcasts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "avatar_file_name"
     t.string "avatar_content_type"
@@ -94,6 +116,8 @@ ActiveRecord::Schema.define(version: 2023_09_06_125528) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "redis_key"
+    t.integer "provider"
+    t.string "uuid"
     t.index ["email"], name: "index_users_on_email"
   end
 

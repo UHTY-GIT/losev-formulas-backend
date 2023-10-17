@@ -14,7 +14,7 @@ module Api
       end
 
       def index
-        podcasts= PodcastQuery.new(Podcast.all, params).call
+        podcasts= PodcastQuery.new(Podcast.includes(:categories).all, params).call
 
         render_success podcasts.as_api_response(:list)
       end
@@ -45,6 +45,22 @@ module Api
         podcasts = Podcast
                      .joins(:favorite_podcasts)
                      .where(favorite_podcasts: { user_id: current_user.id, active: true})
+                     .distinct
+
+        render_success podcasts.as_api_response(:list)
+      end
+
+      swagger_api :user_podcasts do
+        summary "User's podcasts podcast list"
+        param :header, :authtoken, :string, :required, 'User authtoken'
+        response :ok, 'Success'
+      end
+
+      def user_podcasts
+        current_user_must_be && return
+        podcasts = Podcast
+                     .joins(:user_podcasts)
+                     .where(user_podcasts: { user_id: current_user.id})
                      .distinct
 
         render_success podcasts.as_api_response(:list)

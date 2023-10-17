@@ -25,6 +25,7 @@ gem 'redis-namespace', '~> 1.11'
 gem 'jwt', '~> 2.6'
 gem 'bcrypt', '~> 3.1', '>= 3.1.19'
 gem 'passgen', '~> 1.2'
+gem 'uuid', '~> 2.3', '>= 2.3.9'
 
 # Admin panel
 gem 'activeadmin'
