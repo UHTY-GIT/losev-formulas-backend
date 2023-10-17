@@ -18,6 +18,10 @@
     {
       "path": "/api_docs/single_swagger_doc/api/v1/ratings.{format}",
       "description": "Rating"
+    },
+    {
+      "path": "/api_docs/single_swagger_doc/api/v1/orders.{format}",
+      "description": "Orders"
     }
   ],
   "authorizations": null

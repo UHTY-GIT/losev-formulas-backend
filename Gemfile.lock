@@ -1593,6 +1593,8 @@ GEM
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
+    macaddr (1.7.2)
+      systemu (~> 2.6.5)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -1729,6 +1731,7 @@ GEM
     swagger-docs (0.2.9)
       activesupport (>= 3)
       rails (>= 3)
+    systemu (2.6.5)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     thor (1.2.2)
@@ -1736,6 +1739,8 @@ GEM
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uuid (2.3.9)
+      macaddr (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.5)
@@ -1792,9 +1797,10 @@ DEPENDENCIES
   swagger-docs
   swagger_ui_engine!
   tzinfo-data
+  uuid (~> 2.3, >= 2.3.9)
 
 RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.4.8
+   2.4.14

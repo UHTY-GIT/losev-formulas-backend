@@ -6,6 +6,8 @@ class Podcast < ApplicationRecord
 
   has_and_belongs_to_many :categories, -> { distinct }
   has_many :favorite_podcasts
+  has_many :orders
+  has_many :user_podcasts
 
   validates :title, :description, presence: true
 
