@@ -46,6 +46,7 @@ class Podcast < ApplicationRecord
     t.add :rating
     t.add :image_url
     t.add :audio_url
+    t.add lambda { |podcast, options| podcast.blocked?(options[:current_user]) }, as: :blocked
   end
 
   api_accessible :list, extend: :simple do |t|
@@ -58,5 +59,14 @@ class Podcast < ApplicationRecord
 
   def audio_url
     audio.file? ? audio.url : nil
+  end
+
+  def blocked?(current_user)
+    return false if user_podcasts.pluck(:user_id).include?(current_user&.id)
+    podcast_paid?
+  end
+
+  def podcast_paid?
+     categories.pluck(:category_type).include?("paid")
   end
 end

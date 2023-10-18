@@ -6,6 +6,7 @@ module Api
 
       swagger_api :index do
         summary "All podcasts"
+        param :header, :authtoken, :string, :optional, 'User authtoken'
         param :query, :category_type, :string, :optional, "Category type free | paid"
         param :query, :category_name, :string, :optional, "Category name"
         param :query, :sort_by, :string, :optional, 'Sort by name, created, price'
@@ -16,7 +17,7 @@ module Api
       def index
         podcasts= PodcastQuery.new(Podcast.includes(:categories).all, params).call
 
-        render_success podcasts.as_api_response(:list)
+        render_success podcasts.as_api_response(:list, current_user: current_user )
       end
 
       swagger_api :add_to_favorite do
@@ -47,7 +48,7 @@ module Api
                      .where(favorite_podcasts: { user_id: current_user.id, active: true})
                      .distinct
 
-        render_success podcasts.as_api_response(:list)
+        render_success podcasts.as_api_response(:list, current_user: current_user)
       end
 
       swagger_api :user_podcasts do
@@ -63,27 +64,29 @@ module Api
                      .where(user_podcasts: { user_id: current_user.id})
                      .distinct
 
-        render_success podcasts.as_api_response(:list)
+        render_success podcasts.as_api_response(:list, current_user: current_user)
       end
 
       swagger_api :top do
         summary "Top podcasts"
+        param :header, :authtoken, :string, :optional, 'User authtoken'
         response :ok, 'Success'
       end
 
       def top
         podcasts = Podcast.in_top
-        render_success podcasts.as_api_response(:simple)
+        render_success podcasts.as_api_response(:simple, context: { current_user: current_user })
       end
 
       swagger_api :recommendation do
         summary "Recommend podcasts"
+        param :header, :authtoken, :string, :optional, 'User authtoken'
         response :ok, 'Success'
       end
 
       def recommendation
         podcasts = Podcast.recommended
-        render_success podcasts.as_api_response(:simple)
+        render_success podcasts.as_api_response(:simple, context: { current_user: current_user })
       end
     end
   end
