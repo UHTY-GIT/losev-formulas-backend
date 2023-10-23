@@ -75,7 +75,7 @@ module Api
 
       def top
         podcasts = Podcast.in_top
-        render_success podcasts.as_api_response(:simple, context: { current_user: current_user })
+        render_success podcasts.as_api_response(:list, context: { current_user: current_user })
       end
 
       swagger_api :recommendation do
@@ -86,7 +86,7 @@ module Api
 
       def recommendation
         podcasts = Podcast.recommended
-        render_success podcasts.as_api_response(:simple, context: { current_user: current_user })
+        render_success podcasts.as_api_response(:list, context: { current_user: current_user })
       end
     end
   end
