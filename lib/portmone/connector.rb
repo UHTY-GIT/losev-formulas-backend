@@ -30,5 +30,21 @@ module Portmone
 
       PORTMONE_LINK_URL + encoded_data
     end
+
+    def self.make_post_request(url, data, token)
+
+      http = Net::HTTP.new(url.port, url.host)
+      http.use_ssl = true
+
+      request = Net::HTTP::Post.new(url)
+
+      request["accept"] = 'application/json'
+      request["content-type"] = 'application/json'
+      request["authorization"] = "bearer #{token}"
+
+
+
+
+    end
   end
 end
