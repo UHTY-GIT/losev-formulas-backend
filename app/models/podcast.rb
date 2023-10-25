@@ -45,7 +45,7 @@ class Podcast < ApplicationRecord
     t.add :price
     t.add :rating
     t.add :image_url
-    t.add lambda { |podcast, options| podcast.audio_url unless podcast.without_audio(options[:current_user])}, as: :audio_url
+    t.add :audio_url, unless: lambda { |podcast, options| podcast.without_audio(options[:current_user]) }
     t.add lambda { |podcast, options| podcast.blocked?(options[:current_user]) }, as: :blocked
   end
 
