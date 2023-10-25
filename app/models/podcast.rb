@@ -45,7 +45,7 @@ class Podcast < ApplicationRecord
     t.add :price
     t.add :rating
     t.add :image_url
-    t.add :audio_url
+    t.add lambda { |podcast, options| podcast.audio_url unless podcast.without_audio(options[:current_user])}, as: :audio_url
     t.add lambda { |podcast, options| podcast.blocked?(options[:current_user]) }, as: :blocked
   end
 
@@ -55,6 +55,11 @@ class Podcast < ApplicationRecord
 
   def image_url
     image.file? ? image.url : nil
+  end
+
+  def without_audio(current_user)
+    return podcast_paid? unless current_user
+    user_podcasts.exists?(user_id: current_user) ? false : true
   end
 
   def audio_url

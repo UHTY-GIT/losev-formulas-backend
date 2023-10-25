@@ -17,7 +17,7 @@ module Api
       def index
         podcasts= PodcastQuery.new(Podcast.includes(:categories).all, params).call
 
-        render_success podcasts.as_api_response(:list, current_user: current_user )
+        render_success podcasts.as_api_response(:list, current_user: current_user)
       end
 
       swagger_api :add_to_favorite do
